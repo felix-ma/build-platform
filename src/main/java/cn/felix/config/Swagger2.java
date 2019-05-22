@@ -31,7 +31,7 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.felix.flowablespringboot"))
+                .apis(RequestHandlerSelectors.basePackage("cn.felix.web"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(securityContext())
@@ -40,7 +40,7 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("flowable-springboot")
+                .title("build-platform")
                 .description("")
                 .termsOfServiceUrl("")
                 .version("1.0")

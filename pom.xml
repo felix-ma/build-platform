@@ -27,7 +27,7 @@
         <winsw.version>2.0.1</winsw.version>
         <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
         <pkg.name>fluent-validator</pkg.name>
-        <pkg.mainClass>com.tianyadu.fluentvalidator.FluentValidatorApplication</pkg.mainClass>
+        <pkg.mainClass>cn.felix.Application</pkg.mainClass>
         <pkg.name>build-platform</pkg.name>
         <pkg.user>platform</pkg.user>
         <pkg.unixLogFolder>/var/log/${pkg.name}</pkg.unixLogFolder>
@@ -218,7 +218,7 @@
                                 <resource>
                                     <directory>src/main/conf</directory>
                                     <excludes>
-                                        <exclude>tb-gateway.conf</exclude>
+                                        <exclude>${pkg.win.dist}.conf</exclude>
                                     </excludes>
                                     <filtering>true</filtering>
                                 </resource>

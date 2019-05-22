@@ -12,16 +12,30 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 @SpringBootApplication
 public class Application {
+    private static final String SPRING_CONFIG_NAME_KEY = "--spring.config.name";
+    public static final String DEFAULT_SPRING_CONFIG_PARAM = SPRING_CONFIG_NAME_KEY + "=" + "build-platform";
+
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Application.class);
-        Environment env = app.run(args).getEnvironment();
+        Environment env = app.run(updateArguments(args)).getEnvironment();
         log(env);
+    }
+
+    private static String[] updateArguments(String[] args) {
+        if (Arrays.stream(args).noneMatch(arg -> arg.startsWith(SPRING_CONFIG_NAME_KEY))) {
+            String[] modifiedArgs = new String[args.length + 1];
+            System.arraycopy(args, 0, modifiedArgs, 0, args.length);
+            modifiedArgs[args.length] = DEFAULT_SPRING_CONFIG_PARAM;
+            return modifiedArgs;
+        }
+        return args;
     }
 
     /**

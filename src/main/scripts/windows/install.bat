@@ -69,37 +69,7 @@ IF "%JRE_PATH2%" == ""  GOTO JAVA_NOT_INSTALLED
 
 @ECHO Java 1.8 found!
 @ECHO Installing ${pkg.name} ...
-
-SET loadDemo=false
-
-if "%1" == "--loadDemo" (
-    SET loadDemo=true
-)
-
-SET BASE=%~dp0
-SET LOADER_PATH=%BASE%\conf,%BASE%\extensions
-SET SQL_DATA_FOLDER=%BASE%\data\sql
-SET jarfile=%BASE%\lib\${pkg.name}.jar
-SET installDir=%BASE%\data
-
-PUSHD %BASE%\conf
-
-java -cp %jarfile% -Dloader.main=${pkg.mainClass}^
-                    -Dinstall.data_dir=%installDir%^
-                    -Dinstall.load_demo=%loadDemo%^
-                    -Dspring.jpa.hibernate.ddl-auto=none^
-                    -Dinstall.upgrade=false^
-                    -Dlogging.config=%BASE%\install\logback.xml^
-                    org.springframework.boot.loader.PropertiesLauncher
-
-if errorlevel 1 (
-   @echo ${pkg.name} installation failed!
-   POPD
-   exit /b %errorlevel%
-)
-POPD
-
-%BASE%${pkg.name}.exe install
+%~dp0${pkg.name}.exe install
 
 @ECHO ${pkg.name} installed successfully!
 
